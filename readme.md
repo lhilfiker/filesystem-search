@@ -7,6 +7,8 @@ An programm out of two parts:
 
 ### Background app
 
+The app will be a standart c++ app. when installing the background app e.g as a deb, it will run a post install script to create a systemctl service and automaticlly enable it. by default it will not scan as the app will look for a config file which doesnt exist yet and will then just turn off again.
+
 #### watching over file changes
 Code that inputs a folder path and a sincewhentolook DateTime, then looks at every last modified date of each file in the folder. It will retunr a list of all files that have a modified datetime after the inputed dateTime. After that it will start to look for any modification (inotifywait on linux) and will index that too and update the last modified sincewhentolook.
 
@@ -16,6 +18,7 @@ The speed of how the first part can be done can be very diffrent depenidng on re
 
 - HDD: 500 000 (files) * 10ms(can be faster, but i cant test) = 83 minutes or less. here this approach would not be a good idea. but because i dont have a hdd system  i will not focus on hdds.
 
+! This speed can be slower when reading mtime on thousends of files at the same time.
 #### indexing and storing the index
 
 #### providing access to other apps
