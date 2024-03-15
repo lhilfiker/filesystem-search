@@ -18,7 +18,16 @@ The speed of how the first part can be done can be very diffrent depenidng on re
 
 - HDD: 500 000 (files) * 10ms(can be faster, but i cant test) = 83 minutes or less. here this approach would not be a good idea. but because i dont have a hdd system  i will not focus on hdds.
 
-! This speed can be slower when reading mtime on thousends of files at the same time.
+! This speed can be slower when reading mtime on thousends of files at the same time. It might be good to use async io or multithreading to decrease io wait times.
+
+new files will be automaticly dedected as theri mtime is after last accessed.
+
+deleted files will not be checked. whenever a search gets requested the programm will look if the files from the search results still exist, if not it will simply exclude it and (if possible) remove it from the index.
+
 #### indexing and storing the index
 
 #### providing access to other apps
+
+#### storing other data
+- config ~/.config/filesystem-search/config
+- logs and erros /var/log/filesystem-search /log or /error
