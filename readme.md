@@ -26,6 +26,15 @@ deleted files will not be checked. whenever a search gets requested the programm
 
 #### indexing and storing the index
 
+each documents gets accessed, normalized:
+- all to lowercase
+- remove keywords as 'and, or, as'
+- remove characters as '. , - _ ! ?'
+- (maybe) only add the base of a word e.g words -> word
+- (maybe) grammar correct (e.g when stuff is wrongly written that it is still searchable.
+, then it will add it to an inverted index with the documents path.
+
+-> without optimization on storage a index with around 500000 files with average 200 words it could reach 1GB in index size.
 #### providing access to other apps
 
 #### storing other data
