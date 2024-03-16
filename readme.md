@@ -32,7 +32,9 @@ each documents gets accessed, normalized:
 - remove characters as '. , - _ ! ?'
 - (maybe) only add the base of a word e.g words -> word
 - (maybe) grammar correct (e.g when stuff is wrongly written that it is still searchable.
-, then it will add it to an inverted index with the documents path.
+- Transforms characters that aren't in the Basic Latin Unicode block to their ASCII equivalent, if one exists. For example, changing à to a.
+
+then it will add it to an inverted index with the documents path.
 
 -> without optimization on storage a index with around 500000 files with average 200 words it could reach 1GB in index size.
 #### providing access to other apps
