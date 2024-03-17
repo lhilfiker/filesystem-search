@@ -32,7 +32,7 @@ int main()
 	
 	std::error_code ec;
 	if(!fs::is_directory(path,ec)) return 4;
-	if(ec) return 1;
+	if(ec) return ec;
 
 	std::vector<fs::path> paths = get_paths(path, datetime);
 
