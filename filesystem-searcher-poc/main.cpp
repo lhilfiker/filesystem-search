@@ -8,13 +8,14 @@
 
 namespace fs = std::filesystem;
 
-std::vector<fs::path> get_paths(fs::path path, time_t datetime) {
+
+std::vector<fs::path> get_paths(fs::path path, fs::file_time_type datetime) {
 	std::vector<fs::path> paths;
 	for (const auto& dir_entry : fs::recursive_directory_iterator(path)) {
 			std::error_code ec;
-			if (!fs::is_directory(dir_entry, ec) && to_time_t(fs::last_write_time(dir_entry, ec)) > datetime) {
+			const auto ftime = fs::last_write_time(dir_entry, ec);
+			if (!fs::is_directory(dir_entry, ec) && ftime > datetime) {
 				paths.push_back(dir_entry.path());
-				std::cout << dir_entry << " got added.";
 			}
 			if (ec) {
 			// error logging
@@ -23,15 +24,12 @@ std::vector<fs::path> get_paths(fs::path path, time_t datetime) {
 	return paths;
 }
 
-time_t to_time_T(fs::file_time_type filetime) {
-   const auto systemTime = std::chrono::clock_cast<std::chrono::system_clock>(filetime);
-   return std::chrono::system_clock::to_time_t(systemTime);
-}
-
 int main() 
 {
-	fs::path path = "/home/user"; 
-	time_t datetime = 946684800;
+	fs::path path = "/";
+	std::cin >> path;
+	// This is just to get a file_time_type for the PoC. In the final implementation a file_time_type will be provided here.	
+	fs::file_time_type datetime = fs::last_write_time("/");
 
 	std::vector<fs::path> paths = get_paths(path, datetime);
 

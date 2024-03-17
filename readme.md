@@ -42,3 +42,5 @@ then it will add it to an inverted index with the documents path.
 #### storing other data
 - config ~/.config/filesystem-search/config
 - logs and erros /var/log/filesystem-search /log or /error
+
+
