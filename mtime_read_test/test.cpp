@@ -11,6 +11,7 @@ int main() {
 
 		    try {
 			            auto ftime = fs::last_write_time(file_path);
+				    auto isdir = fs::is_directory(file_path);
 				            auto end = std::chrono::high_resolution_clock::now();
 
 					            std::chrono::duration<double, std::milli> duration = end - start;
