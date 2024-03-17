@@ -11,6 +11,7 @@ namespace fs = std::filesystem;
 
 std::vector<fs::path> get_paths(fs::path path, fs::file_time_type datetime) {
 	std::vector<fs::path> paths;
+	std::vector<std::error_code> errors;
 	for (const auto& dir_entry : fs::recursive_directory_iterator(path)) {
 			std::error_code ec;
 			const auto ftime = fs::last_write_time(dir_entry, ec);
@@ -18,21 +19,28 @@ std::vector<fs::path> get_paths(fs::path path, fs::file_time_type datetime) {
 				paths.push_back(dir_entry.path());
 			}
 			if (ec) {
-			// error logging
+				errors.push_back(ec);
 			}
+	}
+	if(errors.size() != 0) {
+		//currently just output the error, normally write it to error file.
+		for (std::error_code error : errors) {
+			std::cout << "\nError: " << error.value();
+		}
 	}
 	return paths;
 }
 
 int main() 
 {
+	
+	std::error_code ec;
 	fs::path path = "/home/user/git/filesystem-search/";
 	// This is just to get a file_time_type for the PoC. In the final implementation a file_time_type will be provided here.	
 	fs::file_time_type datetime = fs::last_write_time("/home/user/git/filesystem-search/readme.md");
 	
-	std::error_code ec;
 	if(!fs::is_directory(path,ec)) return 4;
-	if(ec) return ec;
+	if(ec) return ec.value();
 
 	std::vector<fs::path> paths = get_paths(path, datetime);
 
