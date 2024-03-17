@@ -8,22 +8,14 @@ namespace fs = std::filesystem;
 
 std::vector<fs::path> get_paths(fs::path path, fs::file_time_type datetime) {
 	std::vector<fs::path> paths;
-	std::vector<std::error_code> errors;
 	for (const auto& dir_entry : fs::recursive_directory_iterator(path)) {
 			std::error_code ec;
-			const auto ftime = fs::last_write_time(dir_entry, ec);
-			if (!fs::is_directory(dir_entry, ec) && ftime > datetime) { // No read, is text file checks because that will the indexer do.
+			if (!fs::is_directory(dir_entry, ec) && fs::last_write_time(dir_entry, ec) > datetime) { // No read, is text file checks because that will the indexer do.
 				paths.push_back(dir_entry.path());
 			}
 			if (ec) {
-				errors.push_back(ec);
+				//errors here are mostly permission errors so not really neccecary.
 			}
-	}
-	if(errors.size() != 0) {
-		//currently just output the error, normally write it to error file.
-		for (std::error_code error : errors) {
-			std::cout << "\nError: " << error.value();
-		}
 	}
 	return paths;
 }
@@ -32,18 +24,20 @@ int main()
 {
 	
 	std::error_code ec;
-	fs::path path = "/home/user/git/filesystem-search/";
+
+	fs::path path = "/";
 	// This is just to get a file_time_type for the PoC. In the final implementation a file_time_type will be provided here.	
-	fs::file_time_type datetime = fs::last_write_time("/home/user/git/filesystem-search/readme.md");
+	fs::file_time_type datetime = fs::last_write_time("/");
 	
 	if(!fs::is_directory(path,ec)) return 4;
 	if(ec) return ec.value();
 
+	auto start = std::chrono::high_resolution_clock::now();
 	std::vector<fs::path> paths = get_paths(path, datetime);
-
-	for (fs::path path : paths) {
-		std::cout << path << "\n";
-	}	
+	
+	auto end = std::chrono::high_resolution_clock::now();
+	auto time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+	std::cout << "\n" << paths.size() << " files found.\nTook " << time.count() << " miliseconds.";	
 
 	return 0;
 
