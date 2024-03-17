@@ -14,7 +14,7 @@ Code that inputs a folder path and a sincewhentolook DateTime, then looks at eve
 
 The speed of how the first part can be done can be very diffrent depenidng on read speed of the filesystem:
 
-- SSD: 500 000 (files) * 0.1ms(on slower systems, it took 0.021695 in a vm) = 50ms(10ms with my speed). This should be way more than enough for the initial file test, even maybe maken the proposed inotifywait unneccesary.
+- SSD: 500 000 (files) * 0.1ms(on slower systems, it took 0.021695 in a vm) = 50s(10s with my speed). This should be way more than enough for the initial file test, even maybe maken the proposed inotifywait unneccesary.
 
 - HDD: 500 000 (files) * 10ms(can be faster, but i cant test) = 83 minutes or less. here this approach would not be a good idea. but because i dont have a hdd system  i will not focus on hdds.
 
