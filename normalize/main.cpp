@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <cctype>
 std::vector<std::string> normalize(std::vector<std::string> input) {
-	const char invalid[] = {'.', ',', '!', '?'};
+	static const char invalid[] = {'.', ',', '!', '?'};
 	int i = 0;
 	for (std::string word : input) {
 		std::string updated = "";
