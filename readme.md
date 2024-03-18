@@ -34,6 +34,8 @@ each documents gets accessed, normalized:
 - (maybe) grammar correct (e.g when stuff is wrongly written that it is still searchable.
 - Transforms characters that aren't in the Basic Latin Unicode block to their ASCII equivalent, if one exists. For example, changing à to a.
 
+for stopwords and stemming the words to work prooperly it needs to be dedcted which language the document is in, this can be added later when starting to support more languages.
+
 then it will add it to an inverted index with the documents path.
 
 -> without optimization on storage a index with around 500000 files with average 200 words it could reach 1GB in index size.
