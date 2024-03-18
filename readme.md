@@ -31,10 +31,10 @@ each documents gets accessed, normalized:
 - remove keywords as 'and, or, as'
 - remove characters as '. , - _ ! ?' (only a-z, A-Z(will be lowercased), 0-9)
 - stem the words.
-- (maybe) grammar correct (e.g when stuff is wrongly written that it is still searchable.
-- Transforms characters that aren't in the Basic Latin Unicode block to their ASCII equivalent, if one exists. For example, changing à to a.
 
 for stopwords and stemming the words to work prooperly it needs to be dedcted which language the document is in, this can be added later when starting to support more languages.
+
+For about 2 millions diffrent words it takes around 4s.
 
 then it will add it to an inverted index with the documents path.
 
