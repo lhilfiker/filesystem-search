@@ -29,8 +29,8 @@ deleted files will not be checked. whenever a search gets requested the programm
 each documents gets accessed, normalized:
 - all to lowercase
 - remove keywords as 'and, or, as'
-- remove characters as '. , - _ ! ?'
-- (maybe) only add the base of a word e.g words -> word
+- remove characters as '. , - _ ! ?' (only a-z, A-Z(will be lowercased), 0-9)
+- stem the words.
 - (maybe) grammar correct (e.g when stuff is wrongly written that it is still searchable.
 - Transforms characters that aren't in the Basic Latin Unicode block to their ASCII equivalent, if one exists. For example, changing à to a.
 
