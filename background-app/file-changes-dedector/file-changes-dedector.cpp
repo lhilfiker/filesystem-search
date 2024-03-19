@@ -2,6 +2,7 @@
 #include <chrono>
 #include <vector>
 #include <iostream>
+#include "../functions.h"
 
 namespace fs = std::filesystem;
 
