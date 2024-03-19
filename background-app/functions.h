@@ -6,6 +6,14 @@
 #include <string>
 #include <filesystem>
 
+struct DocumentIndex {
+	std::filesystem::path document_path;
+	std::vector<std::string> terms;
+
+	DocumentIndex(const std::filesystem::path& path, const std::vector<std::string>& terms)
+		: document_path(path), terms(terms) {}
+};
+
 //file change searcher
 std::vector<std::filesystem::path> get_paths(std::filesystem::path path, std::filesystem::file_time_type datetime);
 
