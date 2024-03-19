@@ -12,4 +12,7 @@ std::vector<std::filesystem::path> get_paths(std::filesystem::path path, std::fi
 //normalize
 std::vector<std::string> normalize(std::vector<std::string> input);
 
+// string to vector
+std::vector<std::string> string_to_vector(std::string input);
+
 #endif
