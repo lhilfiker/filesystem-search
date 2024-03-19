@@ -46,24 +46,3 @@ std::vector<std::string> normalize(std::vector<std::string> input) {
 	return output;
 
 }
-
-int main() {
-	int enteredwords = 0;
-
-	std::string in;
-	std::vector<std::string> inv;
-	while(std::cin >> in) {
-		inv.push_back(in);
-		++enteredwords;
-	}
-	auto start = std::chrono::high_resolution_clock::now();	
-	std::vector<std::string> cleaned = normalize(inv);
-	auto end = std::chrono::high_resolution_clock::now();
-	auto time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-
-	for (auto const word : cleaned) std::cout << "\n" << word;
-	
-	std::cout << "\n\n\nWords entered at beginning: " << enteredwords << "\nWords after: " << cleaned.size() << "\n Took: " << time.count() << " milliseconds.";
-}
-
-
