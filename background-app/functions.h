@@ -23,4 +23,10 @@ std::vector<std::string> normalize(std::vector<std::string> input);
 // string to vector
 std::vector<std::string> string_to_vector(std::string input);
 
+//create document index
+DocumentIndex createDocumentIndex(const std::filesystem::path& path, const std::vector<std::string>& terms);
+
+//forward index from paths
+std::vector<DocumentIndex> forward_index_from_paths(std::vector<std::filesystem::path> paths, bool ignore_files_with_dot);
+
 #endif
