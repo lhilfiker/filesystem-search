@@ -25,9 +25,8 @@ std::vector<DocumentIndex> forward_index_from_paths(std::vector<std::filesystem:
 	std::vector<DocumentIndex> all;
 	for (std::filesystem::path current_path : paths) {
 		std::error_code ec;
-		if (!std::filesystem::exists(current_path) || notallowed.find(current_path.extension()) != notallowed.end() || current_path.string().find("/.") == true) continue; // files with specific extension, do not even try to read it.
 		auto filesize = std::filesystem::file_size(current_path);
-		if (filesize > 20971520) continue; // skip if file is too large, in the future this can be customized.
+		if (!std::filesystem::exists(current_path) || notallowed.find(current_path.extension()) != notallowed.end() || current_path.string().find("/.") == true || filesize > 20971520) continue; // files with specific extension, do not even try to read it.
 		std::string content;
 		content.reserve(filesize); //reserve space for faster read
 		std::ifstream ifs(current_path);
